@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Flash Lusaka Weather Updates</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Linking to the external CSS file -->
+</head>
+<body>
+    <header class="header">
+        <div class="header-title">
+            <h1>Flash Lusaka Weather Updates</h1>
+        </div>
+        <!-- Language Selector -->
+        <div class="language-selector">
+            <label for="languageSelect">Language:</label>
+            <select id="languageSelect" onchange="changeLanguage()">
+                <option value="en">English</option>
+                <option value="pt">Português</option>
+                <option value="es">Español</option>
+                <option value="fr">Français</option>
+            </select>
+        </div>
+    </header>
+
+    <!-- Search Bar Section -->
+    <div class="time-and-search">
+    <div class="search-bar">
+        <input type="text" placeholder="Search for a city" />
+        <button>Search</button>
+    </div>
+</div>
+
+    <!-- Weather Display Section -->
+<div class="weather-overview-container">
+    <div class="weather-overview">
+        <h2 id="location">--</h2>
+        <p id="temperature">--°C</p>
+        <div id="icon" class="weather-icon">
+            <img id="weatherIcon" src="" alt="Weather Icon" style="display: none; width: 100px;">
+        </div>
+        <p id="description">--</p>
+    </div>
+</div>
+
+    <p id="description">--</p>
+</div>
+
+
+        <!-- Individual Weather Info Sections -->
+        <div class="weather-info-container">
+            <div class="weather-info" id="humidity-info">
+                <img src="humidity image.jpg" alt="Humidity Background">
+                <p data-i18n="humidity.label">Humidity</p>
+                <p id="humidity">--%</p>
+            </div>
+            <div class="weather-info" id="wind-speed-info">
+                <img src="wind Speed image.jpg" alt="Wind Speed Background">
+                <p data-i18n="windSpeed.label">Wind Speed</p>
+                <p id="windSpeed">-- km/h</p>
+            </div>
+            <div class="weather-info" id="wind-direction-info">
+                <img src="wind Direction.jpg" alt="Wind Direction Background">
+                <p data-i18n="windDirection.label">Wind Direction</p>
+                <p id="windDirection">--°</p>
+            </div>
+            <div class="weather-info" id="pressure-info">
+                <img src="pressure.jpg" alt="Pressure Background">
+                <p data-i18n="pressure.label">Pressure</p>
+                <p id="pressure">-- hPa</p>
+                <div class="current-time" id="current-time">Loading time...</div>
+            </div>
+        </div>
+
+    <!-- 5-Day Forecast Section -->
+    <div class="forecast-section">
+        <h2>Weather Forecast</h2>
+    <div id="forecastDisplay" class="forecast-container"></div> 
+        </div>
+
+    <!-- Links Section -->
+    <div class="links-section">
+        <ul class="links">
+            <li> Useful Links: </li>
+            <li><a href="http://www.icuzambia.net">ICU Zambia</a></li>
+            <li><a href="https://www.zrdc.org">ZRDC</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">contacts:</label>
+            <select id="contactSelect" onchange="choose contact()">
+                <option value="en">+260972635300</option>
+                <option value="pt">+260974940546</option>
+            </select></li></a>
+        </ul>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>Lusaka.   All Rights Reserved.    Designed and Maintained By Mkhuzo Thole,     SIN: [2402593290]</p>
+    </footer>
+
+    <script src="script.js"></script> <!-- Linking to the external JS file -->
+    <script>
+                // Language translations
+        const translations = {
+            en: {
+                "header.title": "Weather Interactive",
+                "search.placeholder": "Enter city name",
+                "search.button": "Search",
+                "humidity.label": "Humidity",
+                "windSpeed.label": "Wind Speed",
+                "windDirection.label": "Wind Direction",
+                "pressure.label": "Pressure",
+                "altitude.label": "Altitude",
+                "links.about": "About",
+                "links.contact": "Contact",
+                "footer.text": "&copy; 2024 Interactive Weather Updates | All Rights Reserved"
+            },
+            pt: {
+                "header.title": "Meteorologia Interativa",
+                "search.placeholder": "Insira o nome da cidade",
+                "search.button": "Buscar",
+                "humidity.label": "Umidade",
+                "windSpeed.label": "Velocidade do Vento",
+                "windDirection.label": "Direção do Vento",
+                "pressure.label": "Pressão",
+                "altitude.label": "Altitude",
+                "links.about": "Sobre",
+                "links.contact": "Contato",
+                "footer.text": "&copy; 2024 Atualizações Meteorológicas Interativas | Todos os Direitos Reservados"
+            },
+            es: {
+                "header.title": "Meteorología Interactiva",
+                "search.placeholder": "Ingrese el nombre de la ciudad",
+                "search.button": "Buscar",
+                "humidity.label": "Humedad",
+                "windSpeed.label": "Velocidad del Viento",
+                "windDirection.label": "Dirección del Viento",
+                "pressure.label": "Presión",
+                "altitude.label": "Altitud",
+                "links.about": "Acerca de",
+                "links.contact": "Contacto",
+                "footer.text": "&copy; 2024 Actualizaciones Meteorológicas Interactivas | Todos los Derechos Reservados"
+            },
+            fr: {
+                "header.title": "Météo Interactive",
+                "search.placeholder": "Entrez le nom de la ville",
+                "search.button": "Rechercher",
+                "humidity.label": "Humidité",
+                "windSpeed.label": "Vitesse du Vent",
+                "windDirection.label": "Direction du Vent",
+                "pressure.label": "Pression",
+                "altitude.label": "Altitude",
+                "links.about": "À propos",
+                "links.contact": "Contact",
+                "footer.text": "&copy; 2024 Mises à Jour Météo Interactives | Tous droits réservés"
+            }
+        };
+
+        function changeLanguage() {
+            const selectedLanguage = document.getElementById('languageSelect').value;
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                element.innerText = translations[selectedLanguage][key] || element.innerText;
+            });
+            document.querySelectorAll('[data-i18n-placeholder]').forEach(element => {
+                const key = element.getAttribute('data-i18n-placeholder');
+                element.placeholder = translations[selectedLanguage][key] || element.placeholder;
+            });
+        }
+
+        // Initialize default language
+        changeLanguage();
+    </script>
+</body>
+</html>
